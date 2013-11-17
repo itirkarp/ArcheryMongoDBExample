@@ -12,6 +12,30 @@ class ArchersController < ApplicationController
   def show
     @id = BSON::ObjectId.from_string(params[:id])
     @events = Event.where('rounds.archer_id' => @id).all
+
+    @map = %Q{function(){
+      for (var idx = 0; idx < this.rounds.length; idx++) {
+        var key = this.rounds[idx].archer_id;
+        var value = this.rounds[idx].scores;
+        emit(key, value);
+      }
+    }}
+
+    @reduce = %Q{function(key_archer_id, values){
+      var total = 0;
+      reducedVal = { score: 0};
+      for (var idx = 0; idx < values.length; idx++) {
+          scores = values[idx];
+          for (var j = 0; j < scores.length; j++) {
+            reducedVal.score += parseInt(scores[j]);
+          }
+      }
+      return reducedVal;
+    }}
+
+    Event.map_reduce(@map, @reduce).out(inline: 1).each do |doc|
+      @total_score = doc["value"]["score"] if doc['_id'] == @id
+    end
   end
 
   # GET /archers/new

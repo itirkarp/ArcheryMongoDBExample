@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
-
+<br/>
 <p>
-  <strong>Archer Name:</strong>
-  <%= @archer.name %>
+  <h1>Archer Name: <%= @archer.name %></h1>
 </p>
 
+<p>
+  <h2>Total Score till date: <%= @total_score %></h2>
+</p>
 
-<strong>Events participated in:</strong>
+<br/>
+<h3>Events participated in:</h3>
 <hr/>
 
 <% @events.each do |event| %>
@@ -51,8 +54,6 @@
         <td><%= round.total_arrows %></td>
         <td><%= round.scores %></td>
         <td><%= round.archer.name %></td>
-        <td><%= link_to 'Edit', edit_round_path(round) %></td>
-        <td><%= link_to 'Destroy', round, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
   </tbody>
