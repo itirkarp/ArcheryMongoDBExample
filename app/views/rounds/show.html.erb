@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @round.name %>
+</p>
+
+<p>
+  <strong>Face:</strong>
+  <%= @round.face %>
+</p>
+
+<p>
+  <strong>Distance:</strong>
+  <%= @round.distance %>
+</p>
+
+<p>
+  <strong>Total arrows:</strong>
+  <%= @round.total_arrows %>
+</p>
+
+<p>
+  <strong>Scores:</strong>
+  <%= @round.scores %>
+</p>
+
+<%= link_to 'Edit', edit_round_path(@round) %> |
+<%= link_to 'Back', rounds_path %>
