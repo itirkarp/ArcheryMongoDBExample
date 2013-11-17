@@ -10,6 +10,8 @@ class ArchersController < ApplicationController
   # GET /archers/1
   # GET /archers/1.json
   def show
+    @id = BSON::ObjectId.from_string(params[:id])
+    @events = Event.where('rounds.archer_id' => @id).all
   end
 
   # GET /archers/new

@@ -1,9 +1,65 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Archer Name:</strong>
   <%= @archer.name %>
 </p>
 
+
+<strong>Events participated in:</strong>
+<hr/>
+
+<% @events.each do |event| %>
+<p>
+  <strong>Event Name:</strong>
+  <%= event.name %>
+</p>
+
+<p>
+  <strong>Event Date:</strong>
+  <%= event.event_date %>
+</p>
+
+<p>
+  <strong>Event Type:</strong>
+  <%= event.type %>
+</p>
+
+<p>
+  <strong>Rounds:</strong>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Face</th>
+    <th>Distance</th>
+    <th>Total arrows</th>
+    <th>Scores</th>
+    <th>Archer Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% event.rounds.each do |round| %>
+      <tr>
+        <td><%= round.name %></td>
+        <td><%= round.face %></td>
+        <td><%= round.distance %></td>
+        <td><%= round.total_arrows %></td>
+        <td><%= round.scores %></td>
+        <td><%= round.archer.name %></td>
+        <td><%= link_to 'Edit', edit_round_path(round) %></td>
+        <td><%= link_to 'Destroy', round, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+</p>
+<hr/>
+<%end%>
 <%= link_to 'Edit', edit_archer_path(@archer) %> |
 <%= link_to 'Back', archers_path %>
