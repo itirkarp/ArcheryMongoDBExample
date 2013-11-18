@@ -27,7 +27,7 @@ class RoundsController < ApplicationController
     @event = Event.find(params[:round][:event_id])
     respond_to do |format|
       if @event.rounds.create(round_params.merge({:scores => round_params[:scores].split(",")}))
-        format.html { redirect_to rounds_url, notice: 'Round was successfully created.' }
+        format.html { redirect_to events_url, notice: 'Round was successfully created.' }
         format.json { render action: 'show', status: :created, location: @round }
       else
         format.html { render action: 'new' }
